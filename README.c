@@ -18,7 +18,7 @@
  * enjoy :)
  *
  * I have placed few examples In the main method below
-
+*/
 #include "solver.h"
 #include <stdlib.h>
 #include <stdio.h>
