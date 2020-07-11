@@ -55,6 +55,15 @@ void solve(solver *s){
 	int n = s->N;
     int next[2];
     int ***sp = s->sol_ptr;
+
+	//edge case
+	if (n == 1){
+		(*sp)[0][0] = 1;
+    	printf("Solution:\n");
+    	print_board(n, sp);
+        return;
+	}
+
     //find first empty space
     if ((*sp)[0][0] == 0){
         next[0] = 0;
@@ -91,8 +100,9 @@ bool solve_rec(int x, int y, solver *s){
 
     int nextX = next[0];
     int nextY = next[1];
+
     /*reached end of board*/
-    if ((x == -1 && y == -1) || (nextX == -1 && nextY == -1)){
+    if (nextX == -1 && nextY == -1){
         return true;
     }
 
@@ -203,9 +213,12 @@ void print_board(int row_len, int ***board_ptr){
                 rows_passed = i / (bs + 1);
                 col_passed = j / (bs + 1);
                 int num = (*board_ptr)[i-rows_passed][j-col_passed];
-                char wtf[4];
-                sprintf(wtf, "%d,", num);
-                curr = wtf;
+		    
+                /*printing num as a string because we cant print
+                 * numbers > 10 as digits (also assuming num < 999)*/
+		char num_str[4];
+                sprintf(num_str, "%d,", num);
+                curr = num_str;
             }
             printf("%s",curr);
         }
